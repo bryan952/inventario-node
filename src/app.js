@@ -1,20 +1,20 @@
 require('dotenv').config()
 
+const express = require('express')
+const app = express()
+
+// IMPORTAR RUTAS
 const itemsRoutes = require('./routes/items')
+const authRoutes = require('./routes/auth')
 
-const express = require('express');
-const app = express();
+// MIDDLEWARE
+app.use(express.json())
 
-app.use(express.static('public'));
-
-const rutas = require('./routes');
-
-app.use(express.json());
-
+// USAR RUTAS
 app.use('/api', itemsRoutes)
+app.use('/', authRoutes)
 
-app.use('/api', rutas);
-
-app.listen(3000, ()=>{
-console.log("Servidor corriendo en puerto 3000");
-});
+// SERVIDOR
+app.listen(process.env.PORT, () => {
+  console.log("Servidor corriendo en puerto " + process.env.PORT)
+})
