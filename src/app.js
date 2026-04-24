@@ -1,3 +1,7 @@
+require('dotenv').config()
+
+const itemsRoutes = require('./routes/items')
+
 const express = require('express');
 const app = express();
 
@@ -6,6 +10,8 @@ app.use(express.static('public'));
 const rutas = require('./routes');
 
 app.use(express.json());
+
+app.use('/api', itemsRoutes)
 
 app.use('/api', rutas);
 
